@@ -1,0 +1,58 @@
+Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+Example 1:
+
+Input: grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+Output: 1
+Example 2:
+
+Input: grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+Output: 3
+
+=============================================
+class Solution {
+    public int numIslands(char[][] grid) {
+        int rowsize=grid.length;
+        if(rowsize==0)
+            return 0;
+        int colsize=grid[0].length;
+        int numOfIslands=0;
+        for(int i=0;i<rowsize;i++)
+        {
+            for(int j=0;j<colsize;j++)
+            {
+                if(grid[i][j]=='1')
+                {
+                    markCurrentIsland(grid,i,j,rowsize,colsize);
+                    numOfIslands+=1;
+                }
+            }
+        }
+
+        return numOfIslands;
+    }
+
+    public void markCurrentIsland(char[][] grid,int x,int y,int rsize,int csize)
+    {
+        if(x<0||x>=rsize||y<0||y>=csize||grid[x][y]!='1')
+            return;
+        //mark current cell as visited
+        grid[x][y]='2';
+        markCurrentIsland(grid,x+1,y,rsize,csize);  //DOWN
+        markCurrentIsland(grid,x,y+1,rsize,csize);  //RIGHT
+        markCurrentIsland(grid,x-1,y,rsize,csize);  //TOP
+        markCurrentIsland(grid,x,y-1,rsize,csize);  //LEFT
+    }
+}
