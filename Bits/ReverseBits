@@ -1,5 +1,59 @@
-
 Reverse bits of a given 32 bits signed integer.
+-------------------------------------------
+
+/*
+LSB = Least Significant Bit
+It’s simply the rightmost bit in a binary number.
+What does “LSB side of n” mean?
+If you convert a number n to binary, the LSB is the last bit on the right.
+👉 That bit tells you whether the number is even or odd:
+LSB = 0 → even
+LSB = 1 → odd
+Example
+Let
+n = 10
+Binary = 1010
+             ↑
+            LSB
+
+LSB = 0
+
+Another one:
+
+n = 7
+Binary = 111
+           ↑
+          LSB
+
+LSB = 1
+
+How to find LSB of a number (important 👀)
+Using bitwise AND (most common in interviews)
+int lsb = n & 1;
+
+Why this works:
+
+1 in binary → 0001
+
+AND with n keeps only the last bit
+
+Example:
+
+int n = 7;   // 111
+int lsb = n & 1;  // 1
+
+If the question says:
+
+“find the binary number at the LSB side of n”
+
+They usually mean:
+👉 extract the least significant bit of n
+
+Answer:
+
+n & 1
+
+*/
 
 Example 1:
 
@@ -37,10 +91,10 @@ class Solution {
         //=================
         // =000000000000001
         //int lsb=n&1; //1
-        //ou task is to reverse bits, so we need to shift this lsb to opposite to
+        //our task is to reverse bits, so we need to shift this lsb to opposite to
         //the current position of n.
         //since its 32 to bit, we need place this lsb by shifting with 31
-        //after shifting with 31, it becomds 1000000000........0000000
+        //after shifting with 31, it becomes 1000000000........0000000
         //int temp=lsb<<31;
         //now to store this temp to ans variables ,do a OR operation
      //   ans=ans|temp;
